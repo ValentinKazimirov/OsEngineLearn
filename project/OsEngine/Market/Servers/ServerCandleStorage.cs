@@ -276,7 +276,7 @@ namespace OsEngine.Market.Servers
                         reader.Close();
                     }
                 }
-                catch (Exception e)
+                catch (Exception /* e */)
                 {
                     // ignore
                 }
@@ -306,7 +306,7 @@ namespace OsEngine.Market.Servers
                         reader.Close();
                     }
                 }
-                catch (Exception e)
+                catch (Exception /* e */)
                 {
                     // ignore
                 }

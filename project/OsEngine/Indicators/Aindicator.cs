@@ -53,7 +53,7 @@ namespace OsEngine.Indicators
             }
         }
 
-        private bool _isDeleted;
+        private bool _isDeleted = false;
 
         public void Delete()
         {

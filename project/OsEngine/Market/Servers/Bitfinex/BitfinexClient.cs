@@ -71,7 +71,7 @@ namespace OsEngine.Market.Servers.Bitfinex
 
                 HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             }
-            catch (Exception exception)
+            catch (Exception /* exception */)
             {
                 SendLogMessage("Сервер не доступен. Отсутствует интернет. ", LogMessageType.Error);
                 return;

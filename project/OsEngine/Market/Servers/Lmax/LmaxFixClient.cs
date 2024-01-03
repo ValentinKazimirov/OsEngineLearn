@@ -133,7 +133,7 @@ namespace OsEngine.Market.Servers.Lmax
             {
                 _client.Connect(endPoint);
             }
-            catch (Exception e)
+            catch (Exception /* e */)
             {
                 SendLogMessage(OsLocalization.Market.Label56, LogMessageType.Error);
                 Disconnected?.Invoke();
@@ -507,7 +507,7 @@ namespace OsEngine.Market.Servers.Lmax
                             // if new order signal has come, but ClOrdID cannot be converted to int, then the order was not created in OsEngine, ignore it / если пришел сигнал о новом ордере, но ClOrdID не может быть конвертирован в int, значит ордер создавался не в OsEngine, игнорим его
                             order.NumberUser = Convert.ToInt32(numUser);
                         }
-                        catch (Exception e)
+                        catch (Exception /* e */)
                         {
                             return;
                         }
@@ -533,7 +533,7 @@ namespace OsEngine.Market.Servers.Lmax
                         {
                             order.NumberUser = Convert.ToInt32(numUser);
                         }
-                        catch (Exception e)
+                        catch (Exception /* e */)
                         {
                             return;
                         }
@@ -561,7 +561,7 @@ namespace OsEngine.Market.Servers.Lmax
                         {
                             order.NumberUser = Convert.ToInt32(oldNumUser);
                         }
-                        catch (Exception e)
+                        catch (Exception /* e */)
                         {
                             return;
                         }
@@ -628,7 +628,7 @@ namespace OsEngine.Market.Servers.Lmax
                     {
                         order.NumberUser = Convert.ToInt32(numUser);
                     }
-                    catch (Exception e)
+                    catch (Exception /* e */)
                     {
                         return;
                     }

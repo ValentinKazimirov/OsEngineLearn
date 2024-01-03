@@ -549,7 +549,7 @@ namespace OsEngine.Market.Servers.BitMax
                         TimeStart = TimeManager.GetDateTimeFromTimeStamp(Convert.ToInt64(candlesResponce.data[i].data.ts))
                     });
                 }
-                catch (Exception error)
+                catch (Exception /* error */)
                 {
                     //ignore
                 }

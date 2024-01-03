@@ -57,7 +57,7 @@ namespace OsEngine.Market.Servers.Binance.Futures
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(uri);
                 HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             }
-            catch (Exception exception)
+            catch (Exception /* exception */)
             {
                 SendLogMessage("Сервер не доступен. Отсутствует интернет. ", LogMessageType.Error);
                 return;
@@ -1656,7 +1656,7 @@ namespace OsEngine.Market.Servers.Binance.Futures
                                 {
                                     _err = JsonConvert.DeserializeAnonymousType(mes, new ErrorMessage());
                                 }
-                                catch (Exception e)
+                                catch (Exception /* e */)
                                 {
                                     // если не смогли распарсить, то просто покажем что пришло
                                     _err.code = 9999;

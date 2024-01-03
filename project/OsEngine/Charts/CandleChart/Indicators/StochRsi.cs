@@ -540,7 +540,7 @@ namespace OsEngine.Charts.CandleChart.Indicators
                 {
                     average += values[i];
                 }
-                catch (Exception e)
+                catch (Exception /* e */)
                 {
 
                 }

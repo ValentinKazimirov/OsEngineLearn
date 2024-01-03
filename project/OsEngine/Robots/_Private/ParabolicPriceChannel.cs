@@ -40,10 +40,10 @@ class ParabolicPriceChannel : BotPanel
     StrategyParameterLabel label2;
     StrategyParameterLabel label3;
     StrategyParameterLabel label4;
-    StrategyParameterLabel label5;
-    StrategyParameterLabel label6;
+    //?StrategyParameterLabel label5;
+    //? StrategyParameterLabel label6;
     StrategyParameterLabel label7;
-    StrategyParameterLabel label8;
+    //?StrategyParameterLabel label8;
 
     decimal lastPriceClose;
     decimal lastPriceChannelUp;

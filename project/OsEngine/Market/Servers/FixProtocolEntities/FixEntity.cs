@@ -31,7 +31,7 @@ namespace OsEngine.Market.Servers.FixProtocolEntities
             {
                 value = Fields.Find(field => field.Tag == tag).Value;
             }
-            catch (Exception e)
+            catch (Exception /* e */)
             {
                 throw new ArgumentException("Запрошено отсутствующее поле");
             }

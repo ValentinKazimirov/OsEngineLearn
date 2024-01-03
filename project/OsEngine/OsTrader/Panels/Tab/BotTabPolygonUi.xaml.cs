@@ -683,7 +683,7 @@ namespace OsEngine.OsTrader.Panels.Tab
                     TryRePaintRow(_grid.Rows[i], rows[i]);
                 }
             }
-            catch (Exception ex)
+            catch (Exception /* ex */)
             {
                 // ignore
             }
@@ -750,7 +750,7 @@ namespace OsEngine.OsTrader.Panels.Tab
                     rowInGrid.Cells[8].Value = rowInArray.Cells[8].Value.ToString();
                 }
             }
-            catch (Exception error)
+            catch (Exception /* error */)
             {
 
             }

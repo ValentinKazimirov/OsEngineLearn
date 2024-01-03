@@ -26,7 +26,7 @@ namespace OsEngine.Market.Servers.Lmax.LmaxEntity
             {
                 _stream.AuthenticateAsClient(uri);
             }
-            catch (AuthenticationException e)
+            catch (AuthenticationException /* e */)
             {
                 _tcpClient.Close();
             }

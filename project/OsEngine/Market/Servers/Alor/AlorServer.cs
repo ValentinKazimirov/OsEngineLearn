@@ -1013,7 +1013,7 @@ namespace OsEngine.Market.Servers.Alor
                     }
                 }
             }
-            catch (Exception exeption)
+            catch (Exception /* exeption */)
             {
 
             }

@@ -57,7 +57,7 @@ namespace OsEngine.Market.Servers.Binance.Spot
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(uri);
                 HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             }
-            catch (Exception exception)
+            catch (Exception /* exception */)
             {
                 SendLogMessage("Server connection error. There is no internet or the exchange server is not available.", LogMessageType.Error);
                 return;

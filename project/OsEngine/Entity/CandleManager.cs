@@ -876,7 +876,7 @@ namespace OsEngine.Entity
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception /* error */)
             {
                 //SendLogMessage(error.ToString(), LogMessageType.Error);
             }

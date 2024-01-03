@@ -532,7 +532,7 @@ namespace OsEngine.Market.Servers.BitStamp
                     NewTradesEvent(trade);
                 }
             }
-            catch (Exception error)
+            catch (Exception /* error */)
             {
 
                 if (LogMessageEvent != null)

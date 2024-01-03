@@ -488,7 +488,7 @@ namespace OsEngine.Market.Servers.Hitbtc
                     return null;
                 }
             }
-            catch (Exception e)
+            catch (Exception /* e */)
             {
                 return null;
             }
