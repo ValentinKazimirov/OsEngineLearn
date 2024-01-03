@@ -326,7 +326,7 @@ namespace OsEngine.OsOptimizer
                     return;
                 }
 
-                int num = 0;
+                //???int num = 0; //GreyCardinal
 
                 OptimizerReport inSampleReport = null;
 
@@ -505,7 +505,7 @@ namespace OsEngine.OsOptimizer
                     return;
                 }
 
-                int num = 0;
+                //? GreyCardinal int num = 0;
 
                 OptimizerReport inSampleReport = null;
 

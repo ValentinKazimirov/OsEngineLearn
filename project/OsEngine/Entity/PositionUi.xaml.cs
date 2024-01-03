@@ -313,7 +313,7 @@ namespace OsEngine.Entity
                 _closeOrdersGrid.ContextMenu = menu;
                 _closeOrdersGrid.ContextMenu.Show(_closeOrdersGrid, new System.Drawing.Point(mouse.X, mouse.Y));
             }
-            catch (Exception error)
+            catch (Exception )
             {
 
             }
@@ -403,7 +403,7 @@ namespace OsEngine.Entity
                 _openOrdersGrid.ContextMenu = menu;
                 _openOrdersGrid.ContextMenu.Show(_openOrdersGrid, new System.Drawing.Point(mouse.X, mouse.Y));
             }
-            catch (Exception error)
+            catch (Exception )
             {
 
             }
@@ -705,7 +705,7 @@ namespace OsEngine.Entity
                 _tradesGrid.ContextMenu = menu;
                 _tradesGrid.ContextMenu.Show(_tradesGrid, new System.Drawing.Point(mouse.X, mouse.Y));
             }
-            catch (Exception error)
+            catch (Exception )
             {
 
             }

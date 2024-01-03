@@ -284,7 +284,7 @@ namespace OsEngine.Indicators
                     _gridVisual.Rows[rowIndex].Cells[1].Style.SelectionForeColor = dialog.Color;
                 }
             }
-            catch (Exception exception)
+            catch (Exception )
             {
 
             }

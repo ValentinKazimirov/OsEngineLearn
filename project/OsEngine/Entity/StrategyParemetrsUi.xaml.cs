@@ -406,7 +406,7 @@ namespace OsEngine.Entity
                 string[] array = new[] { "", _grid.Rows[index].Cells[1].EditedFormattedValue.ToString() };
                 param.LoadParamFromString(array);
             }
-            catch (Exception exception)
+            catch (Exception )
             {
 
                 _grid.Rows[index].Cells[1].Value = ((StrategyParameterTimeOfDay)_parameters[index]).Value.ToString();

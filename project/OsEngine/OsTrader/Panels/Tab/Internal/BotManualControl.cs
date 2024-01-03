@@ -589,15 +589,23 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             {
                 if (position.Direction == Side.Buy)
                 {
-                    decimal priceRedLine = position.EntryPrice - GetStopDistance(position,bot.Securiti);
+                    decimal priceRedLine = position.StopOrderPrice == 0 ? position.EntryPrice - GetStopDistance(position,bot.Securiti): position.StopOrderPrice ;
+                    if (priceRedLine < bot.PriceBestAsk - GetStopDistance(position, bot.Securiti))// Tralling!
+                    {
+                        priceRedLine = bot.PriceBestAsk - GetStopDistance(position, bot.Securiti);
+                    }
                     decimal priceOrder = priceRedLine - GetStopSlippageDistance(position, bot.Securiti);
-
+                    
                     bot.CloseAtStop(position, priceRedLine, priceOrder);
                 }
 
                 if (position.Direction == Side.Sell)
                 {
-                    decimal priceRedLine = position.EntryPrice + GetStopDistance(position, bot.Securiti);
+                    decimal priceRedLine = position.StopOrderPrice==0?position.EntryPrice + GetStopDistance(position, bot.Securiti): position.StopOrderPrice;
+                    if (priceRedLine > bot.PriceBestAsk + GetStopDistance(position, bot.Securiti))
+                    {
+                        priceRedLine = bot.PriceBestAsk + GetStopDistance(position, bot.Securiti);
+                    }
                     decimal priceOrder = priceRedLine + GetStopSlippageDistance(position, bot.Securiti);
 
                     bot.CloseAtStop(position, priceRedLine, priceOrder);
@@ -608,7 +616,11 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
             {
                 if (position.Direction == Side.Buy)
                 {
-                    decimal priceRedLine = position.EntryPrice + GetProfitDistance(position, bot.Securiti);
+                    decimal priceRedLine = position.ProfitOrderRedLine==0?position.EntryPrice + GetProfitDistance(position, bot.Securiti): position.ProfitOrderRedLine;
+                    if (priceRedLine < bot.PriceBestAsk +GetProfitDistance(position, bot.Securiti))
+                    {
+                        priceRedLine = bot.PriceBestAsk + GetProfitDistance(position, bot.Securiti);
+                    }
                     decimal priceOrder = priceRedLine - GetProfitDistanceSlippage(position, bot.Securiti);
 
                     bot.CloseAtProfit(position, priceRedLine, priceOrder);
@@ -616,7 +628,11 @@ namespace OsEngine.OsTrader.Panels.Tab.Internal
 
                 if (position.Direction == Side.Sell)
                 {
-                    decimal priceRedLine = position.EntryPrice - GetProfitDistance(position, bot.Securiti);
+                    decimal priceRedLine = position.ProfitOrderRedLine == 0 ? position.EntryPrice - GetProfitDistance(position, bot.Securiti): position.ProfitOrderRedLine;
+                    if (priceRedLine > bot.PriceBestAsk - GetProfitDistance(position, bot.Securiti))
+                    {
+                        priceRedLine = bot.PriceBestAsk - GetProfitDistance(position, bot.Securiti);
+                    }
                     decimal priceOrder = priceRedLine + GetProfitDistanceSlippage(position, bot.Securiti);
 
                     bot.CloseAtProfit(position, priceRedLine, priceOrder);

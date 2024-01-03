@@ -365,7 +365,7 @@ namespace Kraken.WebSockets
                 eventHandler.InvokeAll(this, eventObject);
                 return eventObject;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //logger.LogError(ex, "Failed to deserialize addOrderStatus: {message}", eventArgs.RawContent);
                 return null;

@@ -2904,7 +2904,9 @@ namespace OsEngine.OsTrader.Panels.Tab
         /// <param name="priceActivation">the price of the stop order, after reaching which the order is placed</param>
         /// <param name="priceOrder">order price</param>
         public void CloseAtStop(Position position, decimal priceActivation, decimal priceOrder)
-        {
+        {    // GreyCardinal Round
+            priceActivation = Math.Round(priceActivation / position.PriceStep) * position.PriceStep;
+            priceOrder = Math.Round(priceOrder / position.PriceStep) * position.PriceStep;
             TryReloadStop(position, priceActivation, priceOrder);
         }
 
@@ -2994,6 +2996,9 @@ namespace OsEngine.OsTrader.Panels.Tab
             {
                 return;
             }
+            // GreyCardinal
+            priceActivation = Math.Round(priceActivation / position.PriceStep) * position.PriceStep;
+            priceOrder = Math.Round(priceOrder / position.PriceStep) * position.PriceStep;
 
             TryReloadStop(position, priceActivation, priceOrder);
         }
@@ -3019,6 +3024,8 @@ namespace OsEngine.OsTrader.Panels.Tab
         /// <param name="priceOrder">order price</param>
         public void CloseAtProfit(Position position, decimal priceActivation, decimal priceOrder)
         {
+            priceActivation = Math.Round(priceActivation / position.PriceStep) * position.PriceStep;
+            priceOrder = Math.Round(priceOrder / position.PriceStep) * position.PriceStep;
             TryReloadProfit(position, priceActivation, priceOrder);
         }
 
@@ -3948,7 +3955,7 @@ namespace OsEngine.OsTrader.Panels.Tab
                 {
                     return false;
                 }
-
+                ManualPositionSupport.TryReloadStopAndProfit(this, position);/// GreyCardinal - tralling!
                 if (ServerStatus != ServerConnectStatus.Connect ||
                     Securiti == null ||
                     Portfolio == null)

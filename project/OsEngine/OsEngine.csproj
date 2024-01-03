@@ -409,6 +409,7 @@
     <Compile Include="Indicators\IndicatorParameter.cs" />
     <Compile Include="Indicators\IndicatorsFactory.cs" />
     <Compile Include="Indicators\ScriptSpells.cs" />
+    <Compile Include="Indicators\_Private\ParabolicPriceChannel_indicator.cs" />
     <Compile Include="Journal\Internal\PositionController.cs" />
     <Compile Include="Journal\JournalUi.xaml.cs">
       <DependentUpon>JournalUi.xaml</DependentUpon>
@@ -1009,7 +1010,8 @@
     <Compile Include="Robots\CurrencyArbitrage\CurrencyMoveExplorer.cs" />
     <Compile Include="Robots\Engines\EnginePair.cs" />
     <Compile Include="Robots\Engines\PolygonalEngine.cs" />
-    <Compile Include="Robots\GreyCardinal\TabSample.cs" />
+    <Compile Include="Robots\_Private\ParabolicPriceChannel.cs" />
+    <Compile Include="Robots\LearnOsE\TabSample.cs" />
     <Compile Include="Robots\OnScriptIndicators\GridSample.cs" />
     <Compile Include="Robots\Engines\CandleEngine.cs" />
     <Compile Include="Robots\Engines\ClusterEngine.cs" />

@@ -93,7 +93,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
                     clientThread.Start();
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Disconnect();
                 Disconnected?.Invoke();
@@ -111,7 +111,7 @@ namespace OsEngine.OsTrader.AdminPanelApi
                     {
                         _clients[i].Stream.Write(data, 0, data.Length);
                     }
-                    catch (Exception e)
+                    catch (Exception )
                     {
                         _clients[i].Close();
                         RemoveConnection(_clients[i].Id);

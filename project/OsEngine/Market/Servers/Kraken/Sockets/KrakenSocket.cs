@@ -70,7 +70,7 @@ namespace Kraken.WebSockets
                 StartListening();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //logger?.LogError(ex, "Error while connecting to '{uri}'", uri);
                 throw;
@@ -157,7 +157,7 @@ namespace Kraken.WebSockets
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                // logger?.LogError(ex, "Error while listening or reading new messages from WebSocket");
                 // TODO: Disconnected-Event

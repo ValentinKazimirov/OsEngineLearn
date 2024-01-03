@@ -167,7 +167,7 @@ namespace OsEngine.OsOptimizer
                     reader.Close();
                 }
             }
-            catch (Exception error)
+            catch (Exception /*error*/)
             {
                 //SendLogMessage(error.ToString(), LogMessageType.Error);
             }

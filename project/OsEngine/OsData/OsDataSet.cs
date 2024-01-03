@@ -2242,7 +2242,7 @@ namespace OsEngine.OsData
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception /*error*/)
             {
                 //SendNewLogMessage(error.ToString(), LogMessageType.Error);
             }
@@ -2281,7 +2281,7 @@ namespace OsEngine.OsData
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception /*error*/)
             {
                 //SendNewLogMessage(error.ToString(), LogMessageType.Error);
             }
@@ -2315,7 +2315,7 @@ namespace OsEngine.OsData
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception /*error*/)
             {
                 //SendNewLogMessage(error.ToString(), LogMessageType.Error);
             }
@@ -2360,7 +2360,7 @@ namespace OsEngine.OsData
                     }
                 }
             }
-            catch (Exception error)
+            catch (Exception /*error*/)
             {
                 //SendNewLogMessage(error.ToString(), LogMessageType.Error);
             }
