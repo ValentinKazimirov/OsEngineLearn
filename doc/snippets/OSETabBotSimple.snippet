@@ -23,6 +23,11 @@
 					<ToolTip>Имя бота</ToolTip>
 					<Default>MyNameBot</Default>
 				</Literal>
+				<Literal>
+					<ID>Description</ID>
+					<ToolTip>Описание бота</ToolTip>
+					<Default>My super bot</Default>
+				</Literal>
 			</Declarations>
 			<Imports>
 				<Import>
@@ -73,7 +78,7 @@ namespace OsEngine.Robots.$MyNamespace$
         // Constructor
         public $MyNameBot$(string name, StartProgram startProgram) : base(name, startProgram)
         {
-            Description = "This is bot description";
+            Description = "$Description$";
             
             TabCreate(BotTabType.Simple);
             _tabSimple = TabsSimple[0];
