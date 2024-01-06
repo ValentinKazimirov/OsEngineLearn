@@ -8,6 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
+/* Description
+Private bot paraboloc price channel
+*/
+
 [Bot("ParabolicPriceChannel")]
 class ParabolicPriceChannel : BotPanel
 {
@@ -109,6 +113,8 @@ class ParabolicPriceChannel : BotPanel
         _tab.CandleFinishedEvent += _tab_CandleFinishedEvent;
         Bot_ParametrsChangeByUser();
 
+        Description = "Private paid bot " +
+            " Not for public";
     }
 
     private void Bot_ParametrsChangeByUser()

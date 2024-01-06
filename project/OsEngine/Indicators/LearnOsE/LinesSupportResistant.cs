@@ -7,6 +7,9 @@ using System.Drawing; // Для отрисовки
 using OsEngine.Entity; // Базовые элементы 
 using OsEngine.Indicators; // Индикаторыне элементы
 
+/* Description
+Draw lines support and resistant
+*/
 
 namespace OsEngine.Indicators.LearnOsE // Название вашего просттранства 
 {
