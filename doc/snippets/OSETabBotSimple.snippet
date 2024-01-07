@@ -60,6 +60,7 @@ Description
 Важно! Описания кешируются. если не видите свое описание - удалите файл 
 project\OsEngine\bin\Debug\BotsDescriprion.txt 
 при старте создаст заново и описание появится
+Ниже измените описание своего бота
 
 $Description$
 */
@@ -76,7 +77,7 @@ namespace OsEngine.Robots.$MyNamespace$
         // опциональные параметры бота
         private StrategyParameterBool isActive; 
         private StrategyParameterDecimal volumeParam; 
-        private StrategyParameterInt pointsSL, pointsTP;
+        private StrategyParameterInt percentSL, percentTP;
 
         // Обязательные переопределяемые функции 
 		public override string GetNameStrategyType()
@@ -94,28 +95,40 @@ namespace OsEngine.Robots.$MyNamespace$
         {
             Description = "$Description$";
             
-            TabCreate(BotTabType.Simple);
-            _tabSimple = TabsSimple[0];
+            // Названия переменных на разных языках
+            var nameIsActive = OsLocalization.ConvertToLocString(
+            "Eng:Is Active_" +
+            "Ru:Активен_");
+            var nameVolume = OsLocalization.ConvertToLocString(
+            "Eng:Volume_" +
+            "Ru:Объем_");
+            var namePercentToStopLost = OsLocalization.ConvertToLocString(
+            "Eng:Percent to StopLost_" +
+            "Ru:Процентов до StopLost_");
+
+            var namePercentToTakeProfit = OsLocalization.ConvertToLocString(
+            "Eng:Percent to TakeProfit_" +
+            "Ru:Процентов до TakeProfit_");
+
+            TabCreate(BotTabType.Simple);  _tabSimple = TabsSimple[0];
 
             // Events события
-            _tabSimple.CandleFinishedEvent += _tab_CandleFinishedEvent; // свечка сформировалась
-            _tabSimple.PositionOpeningSuccesEvent += _tab_PositionOpeningSuccesEvent; // Позиция открылась успешно
-            _tabSimple.MarketDepthUpdateEvent += _tab_MarketDepthUpdateEvent; // Изменился стакан
-            _tabSimple.NewTickEvent += _tab_NewTickEvent; // Пришел новый тикет в рынке
+            _tabSimple.NewTickEvent += Strateg_tab_NewTickEvent; // Пришел новый тик в рынке
+            _tabSimple.CandleFinishedEvent += Strateg_tab_CandleFinishedEvent; // свечка сформировалась
+            _tabSimple.MarketDepthUpdateEvent += Strateg_tab_MarketDepthUpdateEvent; // Изменился стакан
+            _tabSimple.PositionOpeningSuccesEvent += Strateg_tab_PositionOpeningSuccesEvent; // Позиция открылась успешно
 
             // Params Параметры
-            isActive = CreateParameter(OsLocalization.ConvertToLocString(
-            "Eng:Is Active_" +
-            "Ru:Активно_"), true);
-			// Параметры которые могут быть оптимизированы. Имя, значение по умолчанию, далее для оптимизатора: минимум, максимум, шаг
-            volumeParam = CreateParameter("Volume", 1.0m, 1.0m, 10.0m, 1.0m);
-            pointsSL = CreateParameter("Points to StopLost", 50, 10, 1000, 10);
-            pointsTP = CreateParameter("Points to TakeProfit", 150, 10, 1000, 10);
+            isActive = CreateParameter(nameIsActive, true);
+            // Параметры которые могут быть оптимизированы. Имя, значение по умолчанию, далее для оптимизатора: минимум, максимум, шаг
+            volumeParam = CreateParameter("Volume", 1.0m, 1.0m, 10.0m, 1.0m);// Можно написать и без указания языка
+            percentSL = CreateParameter(namePercentToStopLost, 1, 1, 100, 1);
+            percentTP = CreateParameter(namePercentToTakeProfit, 2, 1, 100, 1);
 
         }
 
         // Follow opening positions событие позиция открыта
-        private void _tab_PositionOpeningSuccesEvent(Position position)
+        private void Strateg_tab_PositionOpeningSuccesEvent(Position position)
         {
             trallingPosition(position, _tabSimple);
         }
@@ -126,47 +139,58 @@ namespace OsEngine.Robots.$MyNamespace$
             decimal _newStopPrice = 0, _newProfitPrice = 0;
             if (position.Direction == Side.Buy)
             {
-                _newStopPrice = tab.PriceBestAsk - pointsSL.ValueInt * tab.Securiti.PriceStep;
+                _newStopPrice = tab.PriceBestBid *(1- percentSL.ValueInt /100);
                 if (_newStopPrice > position.StopOrderPrice)
                 {
                     tab.CloseAtStop(position, _newStopPrice, _newStopPrice);
                 }
-                _newProfitPrice = tab.PriceBestBid + pointsTP.ValueInt * tab.Securiti.PriceStep;
+                _newProfitPrice = tab.PriceBestBid + percentTP.ValueInt * tab.Securiti.PriceStep;
                 if (_newProfitPrice > position.ProfitOrderPrice)
                 {
                     tab.CloseAtProfit(position, _newProfitPrice, _newProfitPrice);
                 }
-//                tab.CloseAtTrailingStop(position, position.EntryPrice + pointsSL.ValueInt * tab.Securiti.PriceStep, position.EntryPrice + pointsSL.ValueInt * tab.Securiti.PriceStep);
             }
             if (position.Direction == Side.Sell)
             {
-                _newStopPrice = tab.PriceBestBid + pointsSL.ValueInt * tab.Securiti.PriceStep;
-                if (_newStopPrice < position.StopOrderPrice)
+                _newStopPrice = tab.PriceBestAsk + (1+percentSL.ValueInt /100);
+                if (position.StopOrderPrice==0 ||_newStopPrice < position.StopOrderPrice)
                     tab.CloseAtStop(position, _newStopPrice, _newStopPrice);
-                _newProfitPrice = tab.PriceBestAsk - pointsTP.ValueInt * tab.Securiti.PriceStep;
-                if (_newProfitPrice < position.ProfitOrderPrice)
+                _newProfitPrice = tab.PriceBestAsk - (1-percentTP.ValueInt /100);
+                if (position.ProfitOrderPrice==0||_newProfitPrice < position.ProfitOrderPrice)
                 {
                     tab.CloseAtProfit(position, _newProfitPrice, _newProfitPrice);
                 }
-                //  tab.CloseAtTrailingStop(position, position.EntryPrice + pointsSL.ValueInt * tab.Securiti.PriceStep, position.EntryPrice + pointsSL.ValueInt * tab.Securiti.PriceStep);
             }
         }
         
         // Logics for enter position
-        private void _tab_CandleFinishedEvent(List<Candle> candels)
+        private void Strateg_tab_CandleFinishedEvent(List<Candle> candels)
         {
             if (isActive.ValueBool == false) { return; }
-
 
             List<Position> positions = _tabSimple.PositionsOpenAll;
 
             if (positions.Count == 0)
             {
                 // Открытых нет
+                // Простой алгоритм -молот 
+                bool candelUp = candels[candels.Count - 1].IsUp;
+                bool candelDown = candels[candels.Count - 1].IsDown;
+                decimal body = candels[candels.Count - 1].Body;
+                decimal upShadow = candels[candels.Count - 1].ShadowTop;
+                decimal downShadow = candels[candels.Count - 1].ShadowBottom;
+                if (candelUp && body < downShadow / 2 && body > upShadow)
+                {
+                    _tabSimple.BuyAtMarket(1);
+                }
+                if (candelDown && body < upShadow / 2 && body > downShadow)
+                {
+                    _tabSimple.SellAtMarket(1);
+                }
             }
             else
             {
-                foreach(var position in positions)// Перебираем каждую открытую
+                foreach (var position in positions)// Перебираем каждую открытую
                 {
                     trallingPosition(position, _tabSimple);
                 }
@@ -174,7 +198,7 @@ namespace OsEngine.Robots.$MyNamespace$
         }
 
         // По стакану сделок появилось событие
-		private void _tab_MarketDepthUpdateEvent(MarketDepth marketDepth)
+		private void Strateg_tab_MarketDepthUpdateEvent(MarketDepth marketDepth)
         {
             if (!_tabSimple.IsConnected)
             {
@@ -184,7 +208,7 @@ namespace OsEngine.Robots.$MyNamespace$
         }
 
         // Получено новое событие по свечке
-		private void _tab_NewTickEvent(Trade trade)
+		private void Strateg_tab_NewTickEvent(Trade trade)
         {
             if (!_tabSimple.IsConnected)
             {
