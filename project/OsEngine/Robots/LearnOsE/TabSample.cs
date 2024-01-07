@@ -5,14 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 /* Description
-Fisher based on multithreading
-
-Entering a position - we are waiting for a sharp price deviation 
-by the specified number of percent from the edge of the order book.
-
-Exit a position when the price rolls back by 50 percent or more of the entry
-price. Those. if the price has returned half or more of the original movement.
- */
+desc
+*/
 
 using OsEngine.Entity;
 using OsEngine.OsTrader.Panels.Attributes;
@@ -32,9 +26,9 @@ namespace OsEngine.Robots.GreyCardinal
 
 namespace OsEngine.Robots.MyNamespace
 {
-    [Bot("MyNameBot")]
+    [Bot("TabSample")]
 
-    internal class MyNameBot : BotPanel
+    internal class TabSample : BotPanel
     {
 
         private BotTabSimple _tabSimple;
@@ -44,7 +38,7 @@ namespace OsEngine.Robots.MyNamespace
 
         public override string GetNameStrategyType()
         {
-            return "MyNameBot";
+            return "TabSample";
         }
 
 
@@ -55,7 +49,7 @@ namespace OsEngine.Robots.MyNamespace
 
 
         // Constructor
-        public MyNameBot(string name, StartProgram startProgram) : base(name, startProgram)
+        public TabSample(string name, StartProgram startProgram) : base(name, startProgram)
         {
             Description = "This is bot description";
 
@@ -73,7 +67,7 @@ namespace OsEngine.Robots.MyNamespace
             volumeParam = CreateParameter("Volume", 1.0m, 1.0m, 10.0m, 1.0m);
             pointsSL = CreateParameter("Points to StopLost", 50, 10, 1000, 1);
             pointsTP = CreateParameter("Points to TakeProfit", 150, 10, 1000, 1);
-
+            this.Description = "Tab sample bot";
         }
 
         // Follow opening positions
